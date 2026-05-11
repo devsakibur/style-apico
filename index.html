@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STYLE APICO | Bold Fashion for Modern Women</title>
+    
+    <!-- ADD YOUR FAVICON HERE -->
+    <link rel="icon" type="image/png" href="logo.png" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#FF6B6B',     /* Bold Coral/Pink */
+                            teal: '#2A9D8F',     /* Energetic Modern Teal */
+                            gold: '#E9C46A',     /* Vibrant Commercial Gold */
+                            dark: '#264653',     /* Deep Navy/Commercial Teal */
+                            light: '#FAFAFA'
+                        }
+                    },
+                    fontFamily: {
+                        'primary': ['Montserrat', 'Calibri', 'sans-serif'],
+                        'accent': ['Playfair Display', 'Rosca', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body { font-family: 'Montserrat', sans-serif; background-color: #FAFAFA; color: #264653; overflow-x: hidden; }
+        
+        /* Modern Gradient Background */
+        .page-background {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: linear-gradient(125deg, #FFF1F1 0%, #E8F7F5 100%);
+        }
+
+        /* Nav & Elements */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid #FF6B6B; /* Bold border */
+        }
+
+        .collection-card {
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .collection-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .collection-card img {
+            transition: transform 1.5s ease;
+        }
+        
+        .collection-card:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        /* Commercial Buttons */
+        .btn-commercial {
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Button Shimmer Effect */
+        .btn-commercial::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-commercial:hover::after {
+            left: 100%;
+        }
+
+        /* Custom Reveal Animation CSS */
+        .gsap-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        /* The main hero is dynamic gold gradient */
+        .hero-gradient {
+            background: linear-gradient(rgba(38, 70, 83, 0.3), rgba(38, 70, 83, 0.6)), 
+                        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-background"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            
+            <!-- ADD YOUR NAV LOGO HERE -->
+            <a href="#home" class="flex items-center gap-3">
+                <img src="logo.png" alt="Style Apico Logo" class="h-10 w-auto" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150x40/FF6B6B/FFFFFF?text=SA+Logo';">
+                <!-- Fallback logo placeholder above if image isn't found -->
+            </a>
+            
+            <!-- Desktop Links (Bold & Colorful) -->
+            <div class="hidden md:flex space-x-6 text-sm font-bold uppercase tracking-wider">
+                <a href="#home" class="hover:text-brand-pink transition">Home</a>
+                <a href="#about" class="hover:text-brand-pink transition">About</a>
+                <a href="#collections" class="hover:text-brand-pink transition">Collections</a>
+                <a href="#contact" class="hover:text-brand-pink transition">Contact</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <div class="md:hidden text-2xl cursor-pointer text-brand-pink" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white w-full px-6 py-4 border-t flex flex-col space-y-4 text-center uppercase text-sm font-bold tracking-widest text-brand-dark">
+            <a href="#home" onclick="toggleMenu()" class="p-2 border-b">Home</a>
+            <a href="#about" onclick="toggleMenu()" class="p-2 border-b">About</a>
+            <a href="#collections" onclick="toggleMenu()" class="p-2 border-b">Collections</a>
+            <a href="#contact" onclick="toggleMenu()" class="p-2 border-b">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section: Dynamic & Energetic -->
+    <section id="home" class="hero-gradient h-screen flex items-center justify-center text-center text-white px-6">
+        <div>
+            <!-- GSAP Reveal Classes Added -->
+            <h1 class="gsap-hero-title font-accent text-5xl md:text-7xl mb-6 leading-tight">Bold Fashion <span class="italic font-normal">Designed</span> for <span class="text-brand-gold">You</span></h1>
+            
+            <p class="gsap-hero-text max-w-2xl mx-auto mb-10 text-lg font-light opacity-90">Discover premium collections designed to bring comfort, confidence, and timeless elegance to your everyday style.</p>
+            
+            <div class="gsap-hero-btns flex flex-col md:flex-row gap-5 justify-center">
+                <a href="#collections" class="btn-commercial bg-brand-pink text-white px-10 py-4 rounded-lg font-semibold hover:bg-white hover:text-brand-pink">Shop Now <i class="fa-solid fa-arrow-right ml-2 text-xs"></i></a>
+                <a href="#collections" class="btn-commercial bg-transparent border-2 border-white px-10 py-4 rounded-lg font-semibold hover:bg-white hover:text-brand-pink">Explore Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us: Clean with Teals and Pinks -->
+    <section id="about" class="py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 gsap-reveal" style="transform-origin: left center;">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1000" alt="About Style Apico" class="rounded-xl shadow-2xl border-l-8 border-brand-teal">
+            </div>
+            <div class="w-full md:w-1/2 gsap-reveal">
+                <span class="text-brand-pink font-semibold tracking-widest uppercase text-sm block mb-2">Our Promise</span>
+                <h2 class="font-accent text-brand-dark text-4xl mb-6">About STYLE APICO</h2>
+                <p class="text-gray-600 leading-relaxed mb-6 font-light">
+                    STYLE APICO is more than just a brand — it is a symbol of elegance, quality, and modern lifestyle. We are committed to delivering premium women’s fashion with exceptional quality, refined finishing, and sophisticated design. Every product is carefully selected to ensure comfort, style, and confidence for modern women.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-brand-teal/5 rounded-lg border-l-4 border-brand-teal">
+                        <h4 class="font-bold text-brand-teal">Trusted Brand</h4>
+                        <p class="text-xs text-gray-500">Premium experience.</p>
+                    </div>
+                    <div class="p-4 bg-brand-pink/5 rounded-lg border-l-4 border-brand-pink">
+                        <h4 class="font-bold text-brand-pink">Exclusive Design</h4>
+                        <p class="text-xs text-gray-500">Comfort and elegance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections: The Core Shop (Colorful Cards) -->
+    <section id="collections" class="py-28 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 gsap-reveal">
+                <span class="text-brand-teal font-semibold tracking-widest uppercase text-sm block mb-2">Shop Our Look</span>
+                <h2 class="font-accent text-brand-dark text-4xl mb-4">Our Collections</h2>
+                <div class="w-24 h-1 bg-brand-pink mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                
+                <!-- Card 1 (Coral Accent) -->
+                <div class="collection-card bg-white rounded-2xl shadow-lg gsap-reveal" style="transition-delay: 0.1s">
+                    <div class="h-96 bg-gray-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-brand-pink/20 mix-blend-overlay"></div>
+                    </div>
+                    <div class="p-8 border-t-4 border-brand-pink">
+                        <h3 class="text-2xl text-brand-dark font-bold mb-2">Saree</h3>
+                        <p class="text-gray-500 text-sm font-light mb-5">Elegant and timeless sarees designed for every occasion.</p>
+                        <button class="btn-commercial text-brand-pink font-bold flex items-center gap-2 group">Shop Now <span class="group-hover:translate-x-1 transition-transform">→</span></button>
+                    </div>
+                </div>
+
+                <!-- Card 2 (Teal Accent) -->
+                <div class="collection-card bg-white rounded-2xl shadow-lg gsap-reveal" style="transition-delay: 0.2s">
+                    <div class="h-96 bg-gray-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-brand-teal/20 mix-blend-overlay"></div>
+                    </div>
+                    <div class="p-8 border-t-4 border-brand-teal">
+                        <h3 class="text-2xl text-brand-dark font-bold mb-2">Three Piece</h3>
+                        <p class="text-gray-500 text-sm font-light mb-5">Modern outfits with premium fabrics and stylish designs.</p>
+                        <button class="btn-commercial text-brand-teal font-bold flex items-center gap-2 group">Shop Now <span class="group-hover:translate-x-1 transition-transform">→</span></button>
+                    </div>
+                </div>
+
+                <!-- Card 3 (Gold Accent) -->
+                <div class="collection-card bg-white rounded-2xl shadow-lg gsap-reveal" style="transition-delay: 0.3s">
+                    <div class="h-96 bg-gray-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-brand-gold/30 mix-blend-overlay"></div>
+                    </div>
+                    <div class="p-8 border-t-4 border-brand-gold">
+                        <h3 class="text-2xl text-brand-dark font-bold mb-2">Jewelry</h3>
+                        <p class="text-gray-500 text-sm font-light mb-5">Beautiful fashion jewelry to complete your perfect look.</p>
+                        <button class="btn-commercial text-brand-gold font-bold flex items-center gap-2 group">Shop Now <span class="group-hover:translate-x-1 transition-transform">→</span></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action: The Customer Experience -->
+    <section class="py-28 bg-brand-teal overflow-hidden text-white relative">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-12 gsap-reveal">
+            <div>
+                <h2 class="font-accent text-4xl mb-8 leading-tight">Elevate Your Lifestyle</h2>
+                <div class="space-y-5 text-lg font-light opacity-90">
+                    <p>"At STYLE APICO, we believe fashion is not only about style — it is about confidence, comfort, and expressing your individuality with elegance."</p>
+                </div>
+            </div>
+            
+            <div class="flex gap-4 flex-wrap">
+                <span class="bg-brand-pink text-white px-5 py-3 rounded-full text-sm font-semibold shadow-xl">Premium Quality</span>
+                <span class="bg-white/10 text-white px-5 py-3 rounded-full text-sm font-semibold">Elegant Designs</span>
+                <span class="bg-brand-gold text-brand-dark px-5 py-3 rounded-full text-sm font-semibold">Trusted Service</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact: Direct commercial connections -->
+    <section id="contact" class="py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-6 gsap-reveal">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <span class="text-brand-pink font-semibold tracking-widest uppercase text-sm block mb-2">Let's Connect</span>
+                    <h2 class="font-accent text-brand-dark text-4xl mb-6">Contact STYLE APICO</h2>
+                    <p class="mb-8 text-gray-500 font-light leading-relaxed">We would love to hear from you. Visit our social media, send us an email, or connect via WhatsApp for immediate support.</p>
+                    
+                    <div class="space-y-5">
+                        <a href="tel:+8801617344585" class="group flex items-center space-x-4 text-xl hover:text-brand-pink transition">
+                            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-brand-pink/5 text-brand-pink group-hover:bg-brand-pink group-hover:text-white transition"><i class="fa-solid fa-phone"></i></span>
+                            <span class="font-light">+880 1617 344585</span>
+                        </a>
+                        <a href="mailto:styleapico@gmail.com" class="group flex items-center space-x-4 text-xl hover:text-brand-pink transition">
+                            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-brand-pink/5 text-brand-pink group-hover:bg-brand-pink group-hover:text-white transition"><i class="fa-solid fa-envelope"></i></span>
+                            <span class="font-light">styleapico@gmail.com</span>
+                        </a>
+                        <a href="https://wa.me/8801617344585" class="group flex items-center space-x-4 text-xl text-green-600 font-bold hover:text-brand-teal transition">
+                            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></span>
+                            <span class="font-light">WhatsApp Support</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-5">
+                    <a href="http://www.facebook.com/styleapico" target="_blank" class="bg-blue-50 text-blue-700 p-8 text-center rounded-2xl hover:bg-blue-600 hover:text-white hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-facebook-f text-3xl"></i>
+                    </a>
+                    <a href="http://www.instagram.com/styleapico" target="_blank" class="bg-pink-50 text-pink-700 p-8 text-center rounded-2xl hover:bg-pink-600 hover:text-white hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-instagram text-3xl"></i>
+                    </a>
+                    <a href="http://www.tiktok.com/@styleapico" target="_blank" class="bg-black text-white p-8 text-center rounded-2xl hover:bg-black/80 hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-tiktok text-3xl"></i>
+                    </a>
+                    <a href="http://www.youtube.com/@styleapico" target="_blank" class="bg-red-50 text-red-700 p-8 text-center rounded-2xl hover:bg-red-600 hover:text-white hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-youtube text-3xl"></i>
+                    </a>
+                    <a href="http://www.linkedin.com/styleapico" target="_blank" class="bg-sky-50 text-sky-700 p-8 text-center rounded-2xl hover:bg-sky-600 hover:text-white hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-linkedin text-3xl"></i>
+                    </a>
+                    <a href="http://www.pinterest.com/styleapico" target="_blank" class="bg-red-50 text-red-600 p-8 text-center rounded-2xl hover:bg-red-700 hover:text-white hover:scale-105 transition duration-300">
+                        <i class="fa-brands fa-pinterest text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: Teal with Gold Accent -->
+    <footer class="py-16 bg-brand-dark text-white text-center border-t border-gray-700">
+        <h3 class="font-accent text-3xl font-bold mb-2 text-brand-gold">STYLE APICO</h3>
+        <p class="text-gray-300 text-sm mb-6 uppercase tracking-widest font-light">Premium Women’s Fashion & Lifestyle</p>
+        <p class="text-xs text-gray-500">© 2026 STYLE APICO. All Rights Reserved.</p>
+    </footer>
+
+    <!-- GSAP Smooth Animation Control -->
+    <script>
+        // Hero staggered entrance
+        const tl = gsap.timeline();
+        tl.to('.gsap-hero-title', { opacity: 1, y: 0, duration: 1, delay: 0.5 });
+        tl.to('.gsap-hero-text', { opacity: 1, y: 0, duration: 0.8 }, '-=0.5');
+        tl.to('.gsap-hero-btns', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 }, '-=0.5');
+
+        // Scroll Reveal Init (requires ScrollTrigger, handled by tailwind CSS approach)
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Simple Intersection Observer to activate the standard reveal animation (faster than full GSAP setup)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('gsap-active');
+                }
+            });
+        });
+        
+        // Add custom reveal class styling
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .gsap-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+                .gsap-active { opacity: 1 !important; transform: translateY(0) !important; }
+                
+                /* Custom Hero State */
+                .gsap-hero-title, .gsap-hero-text, .gsap-hero-btns { opacity: 0; transform: translateY(30px); }
+            </style>
+        `);
+        
+        document.querySelectorAll('.gsap-reveal').forEach((el) => observer.observe(el));
+        
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
